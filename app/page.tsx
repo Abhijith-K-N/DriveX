@@ -16,7 +16,7 @@ export default function HomePage() {
       <main>
        <Hero />
         {/* Featured Cars */}
-       <FeaturedCars featured={featured}/>
+       <FeaturedCars  featured={featured}/>
 
         {/* How It Works */}
     import Link from "next/link";
@@ -64,61 +64,94 @@ export default function HomePage() {
 </div>
 
         {/* Testimonials */}
-        <section style={{ padding: "5rem 2rem", maxWidth: 1200, margin: "0 auto" }}>
-          <div style={{ fontSize: "0.75rem", color: "var(--gold)", textTransform: "uppercase", letterSpacing: "0.12em", fontWeight: 600, marginBottom: "0.5rem" }}>Client Stories</div>
-          <h2 style={{ fontSize: "clamp(1.8rem, 3vw, 2.4rem)", fontWeight: 800, marginBottom: "2.5rem" }}>What Our Clients Say</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
-            {TESTIMONIALS.map((t, i) => (
-              <div key={i} style={{ background: "var(--card)", border: "1px solid var(--border2)", borderRadius: 16, padding: "1.75rem" }}>
-                <div style={{ display: "flex", gap: "0.2rem", color: "var(--gold)", marginBottom: "0.8rem" }}>
-                  {"★★★★★".split("").map((s, j) => <span key={j}>{s}</span>)}
-                </div>
-                <p style={{ fontSize: "0.9rem", color: "var(--text2)", lineHeight: 1.7, marginBottom: "1.2rem", fontStyle: "italic" }}>"{t.text}"</p>
-                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                  <div style={{
-                    width: 40, height: 40, background: "var(--gold-glow)", border: "1px solid var(--border)",
-                    borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center",
-                    fontWeight: 700, fontSize: "0.8rem", color: "var(--gold)", fontFamily: "Syne",
-                  }}>{t.avatar}</div>
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: "0.9rem" }}>{t.name}</div>
-                    <div style={{ fontSize: "0.78rem", color: "var(--text3)" }}>{t.role}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+       <section className="py-20 px-8 max-w-[1200px] mx-auto">
+  <div className="text-[0.75rem] text-[var(--gold)] uppercase tracking-[0.12em] font-semibold mb-2">
+    Client Stories
+  </div>
 
-        {/* CTA */}
-        <div style={{ padding: "4rem 2rem", textAlign: "center", background: "linear-gradient(135deg, var(--navy2), var(--navy3))", borderTop: "1px solid var(--border2)" }}>
-          <h2 style={{ fontFamily: "Syne", fontSize: "2rem", fontWeight: 800, marginBottom: "1rem" }}>Ready to Hit the Road?</h2>
-          <p style={{ color: "var(--text2)", marginBottom: "2rem" }}>Your perfect drive is just a few clicks away.</p>
-          <Link href="/browse" style={{
-            display: "inline-flex", alignItems: "center", gap: "0.5rem",
-            padding: "0.85rem 2rem", borderRadius: 10, fontWeight: 500,
-            background: "var(--gold)", color: "var(--navy)", textDecoration: "none", fontSize: "1rem",
-          }}>
-            Browse All Cars →
-          </Link>
+  <h2 className="text-[clamp(1.8rem,3vw,2.4rem)] font-extrabold mb-10">
+    What Our Clients Say
+  </h2>
+
+  <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
+    {TESTIMONIALS.map((t, i) => (
+      <div
+        key={i}
+        className="bg-[var(--card)] border border-[var(--border2)] rounded-2xl p-7"
+      >
+        <div className="flex gap-[0.2rem] text-[var(--gold)] mb-3">
+          {"★★★★★".split("").map((s, j) => (
+            <span key={j}>{s}</span>
+          ))}
         </div>
 
-        {/* Footer */}
-        <footer style={{
-          padding: "2.5rem", borderTop: "1px solid var(--border2)",
-          display: "flex", justifyContent: "space-between", alignItems: "center",
-          flexWrap: "wrap", gap: "1rem", background: "var(--navy2)",
-        }}>
-          <div style={{ fontFamily: "Syne", fontSize: "1.4rem", fontWeight: 800, color: "var(--gold)" }}>Drive<span style={{ color: "var(--text)" }}>X</span></div>
-          <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap" }}>
-            {["Privacy Policy", "Terms of Service", "Contact", "FAQ"].map((l) => (
-              <span key={l} style={{ fontSize: "0.82rem", color: "var(--text3)", cursor: "pointer" }}>{l}</span>
-            ))}
+        <p className="text-[0.9rem] text-[var(--text2)] leading-[1.7] mb-5 italic">
+          "{t.text}"
+        </p>
+
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-[var(--gold-glow)] border border-[var(--border)] rounded-full flex items-center justify-center font-bold text-[0.8rem] text-[var(--gold)] font-[Syne]">
+            {t.avatar}
           </div>
-          <span style={{ fontSize: "0.78rem", color: "var(--text3)" }}>© 2025 DriveX. All rights reserved.</span>
-        </footer>
-      </main>
-      <Toast />
+
+          <div>
+            <div className="font-semibold text-[0.9rem]">{t.name}</div>
+            <div className="text-[0.78rem] text-[var(--text3)]">
+              {t.role}
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+        {/* CTA */}
+     <div className="py-16 px-8 text-center bg-[linear-gradient(135deg,var(--navy2),var(--navy3))] border-t border-[var(--border2)]">
+  
+  <h2 className="font-[Syne] text-[2rem] font-extrabold mb-4">
+    Ready to Hit the Road?
+  </h2>
+
+  <p className="text-[var(--text2)] mb-8">
+    Your perfect drive is just a few clicks away.
+  </p>
+
+  <Link
+    href="/browse"
+    className="inline-flex items-center gap-2 px-8 py-[0.85rem] rounded-[10px] font-medium bg-[var(--gold)] text-[var(--navy)] no-underline text-[1rem]"
+  >
+    Browse All Cars →
+  </Link>
+
+</div>
+
+        {/* Footer */}
+        <footer className="p-10 border-t border-[var(--border2)] flex justify-between items-center flex-wrap gap-4 bg-[var(--navy2)]">
+
+  <div className="font-[Syne] text-[1.4rem] font-extrabold text-[var(--gold)]">
+    Drive<span className="text-[var(--text)]">X</span>
+  </div>
+
+  <div className="flex gap-8 flex-wrap">
+    {["Privacy Policy", "Terms of Service", "Contact", "FAQ"].map((l) => (
+      <span
+        key={l}
+        className="text-[0.82rem] text-[var(--text3)] cursor-pointer"
+      >
+        {l}
+      </span>
+    ))}
+  </div>
+
+  <span className="text-[0.78rem] text-[var(--text3)]">
+    © 2025 DriveX. All rights reserved.
+  </span>
+
+</footer>
+</main>
+
+<Toast />
     </>
   );
 }
