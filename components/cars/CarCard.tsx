@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Users, Fuel, Settings, Star, Heart } from "lucide-react";
 import { Car } from "@/lib/types";
 import { useStore } from "@/lib/store";
@@ -26,40 +27,53 @@ export default function CarCard({ car }: CarCardProps) {
       {/* Rotating border wrapper */}
       <div className="group relative rounded-2xl p-[2px] overflow-hidden">
 
-        {/* rotating green-gold border */}
+        {/* Rotating green-gold border */}
         <div
           className="
-          absolute inset-0
-          rounded-2xl
-          bg-[conic-gradient(#22c55e,#d4af37,#22c55e,#d4af37)]
-          animate-[spin_8s_linear_infinite]
-          group-hover:animate-[spin_3s_linear_infinite]
+            absolute inset-0
+            rounded-2xl
+            bg-[conic-gradient(#22c55e,#d4af37,#22c55e,#d4af37)]
+            animate-[spin_8s_linear_infinite]
+            group-hover:animate-[spin_3s_linear_infinite]
           "
         />
 
         {/* Card */}
         <div
           className="
-          relative
-          rounded-2xl
-          bg-[#10231a]
-          border border-[var(--border2)]
-          overflow-hidden
-          transition-all duration-300
-          group-hover:-translate-y-2
-          group-hover:shadow-[0_30px_80px_rgba(0,0,0,0.6)]
-        "
+            relative
+            rounded-2xl
+            bg-[#10231a]
+            border border-[var(--border2)]
+            overflow-hidden
+            transition-all duration-300
+            group-hover:-translate-y-2
+            group-hover:shadow-[0_30px_80px_rgba(0,0,0,0.6)]
+          "
         >
-          
-          {/* Visual */}
-          <div className="relative flex h-40 items-center justify-center bg-gradient-to-br from-[var(--navy3)] to-[var(--navy4)] text-[5rem]">
 
+          {/* Image */}
+          <div className="relative h-40 w-full bg-gradient-to-br from-[var(--navy3)] to-[var(--navy4)] overflow-hidden">
+
+            <Image
+              src={car.image}
+              alt={car.name}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#10231a]/60 via-transparent to-transparent" />
+
+            {/* Unavailable badge */}
             {!car.available && (
               <div className="absolute right-3 top-3 rounded border border-red-400/40 bg-red-400/20 px-2 py-[2px] text-[0.7rem] font-semibold text-red-400">
                 Unavailable
               </div>
             )}
 
+            {/* Favorite button */}
             <button
               onClick={handleFav}
               className={`absolute left-3 top-3 flex items-center rounded-lg border border-[var(--border2)] bg-black/50 p-1.5 backdrop-blur transition-all ${
@@ -69,7 +83,6 @@ export default function CarCard({ car }: CarCardProps) {
               <Heart size={16} fill={isFav ? "#f87171" : "none"} />
             </button>
 
-            <span>{car.image}</span>
           </div>
 
           {/* Body */}
@@ -111,7 +124,7 @@ export default function CarCard({ car }: CarCardProps) {
                   ₹{(car.price * 83).toLocaleString("en-IN")}
                 </span>
                 <span className="text-[0.75rem] text-[var(--text3)]">
-                  {" "} /day
+                  {" "}/day
                 </span>
               </div>
 
